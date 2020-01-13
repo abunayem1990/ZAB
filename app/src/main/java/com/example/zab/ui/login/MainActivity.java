@@ -2,6 +2,7 @@ package com.example.zab.ui.login;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.View;
@@ -37,10 +38,13 @@ public class MainActivity extends AppCompatActivity {
         b1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+
                 DoLogin doLogin =new DoLogin();
                 doLogin.execute();
                 e1.setText("");   e2.setText("");
                 e1.requestFocus();
+              
             }
         });
     }
@@ -63,8 +67,10 @@ public class MainActivity extends AppCompatActivity {
         }
         @Override
         protected String doInBackground(String... strings) {
-            if(username.trim().equals("") || passw.trim().equals(""))
+            if(username.trim().equals("") || passw.trim().equals("")){
                 z="Please Give User ID and Password.";
+
+            }
                 else
             {
                 try {
@@ -78,10 +84,14 @@ public class MainActivity extends AppCompatActivity {
                         Statement stmt=con.createStatement();
                         ResultSet rs=stmt.executeQuery(sql);
                     if (rs.next()){
+
+
+
                         z="Log In Successfully.";
+                     //  i= new Intent(getApplicationContext(), LoginActivity.class);
+                       // startActivity(i);
                         isSuccess=true;
                         con.close();
-
                     }
                     else    {
                         z="Invalid Credentials.";
